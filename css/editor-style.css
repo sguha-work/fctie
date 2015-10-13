@@ -1,0 +1,83 @@
+body{ padding: 0; margin: 0}
+
+
+
+
+.fctie_header{
+	position: absolute;
+	width: 100%;
+	height: 5em;
+
+}
+
+.fctie_header .fctie_header-rad{
+	height: 1.5em;
+	width: auto;
+	float: left; 
+	margin: 1.5em 1em 1em 1em;
+}
+
+.fctie_header .fctie_test {
+	position: absolute;
+	left: 20em;
+	min-width: 5em;
+	min-height: 1em;
+	margin-top: 1em; 
+	
+}
+.fctie_header .fctie_header-block {
+	margin-left: .5em;
+	float: left; 	
+}
+
+
+.fctie_input-execute, .fctie_input-export {
+
+    background-color: transparent;
+    width: 5em;
+    height: 2.8em;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #16B891;
+    color: #16B891;
+    cursor: pointer;
+}
+
+.fctie_container{
+	top:5em;
+	position: absolute;
+	
+	width: 100%;
+	height: 88%;
+	
+}
+
+.fctie_container .fctie_block{
+	margin-left: 2%;
+	margin-top: 2%;
+	height: 92%;
+	width: 46%;
+	float: left;
+	
+}
+
+.fctie_container .fctie_block .fctie_block-heading {
+
+	background-color:#CCFFCC;
+	padding: .5em;
+}
+
+.fctie_container .fctie_block .fctie_block-container{
+
+	height: 94%;
+	width: 99.7%;
+
+}
+
+.fctie_container .fctie_block .fctie_block-container textarea{
+	margin: 0;
+	height: 99%;
+	width: 98.8%;
+	resize: none;
+	outline: none;
+}
