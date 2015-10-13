@@ -38,6 +38,75 @@ fctie.attachLibraryToProgram = (function(libraryIndex) {
 	window.fctie.libraryList[libraryIndex].isused = 1;
 });
 
+fctie.configObject = ({
+    inputContainer : $("#fctie_input textarea"),
+    outputContainer : $("#fctie_output")
+});
+
+fctie.fiddle = (function() {
+    	this.getInputContent = (function() {
+            var htmlContent = window.fctie.configObject.inputContainer.val();
+            return htmlContent
+        });
+
+        this.resetElements = (function() {
+            resetInputContent();
+            resetOutputContent();
+        });
+
+        var resetOutputContent = (function() {
+            window.fctie.configObject.outputContainer.attr('src', 'balnk.html');
+        });
+
+        var resetInputContent = (function() {
+            if(window.fctie.configObject.htmlEditor.length) {
+                if(window.fctie.configObject.htmlEditor[0].tagName == "TEXTAREA") {
+                    window.fctie.configObject.htmlEditor.val("");
+                } else {
+                    window.fctie.configObject.htmlEditor.empty();
+                }
+            }
+        });
+
+        var prepareFullHTML = (function(htmlContent, cssContent, jsContent, selectedLibrary) {
+            var finalHTMLContent = '<!DOCTYPE html><html><head>';
+
+            // adding the library
+            if ($.trim(selectedLibrary)) {
+                finalHTMLContent += '<script type="text/javascript" src="' + selectedLibrary + '"></script>';
+            }
+
+            // adding the css
+            finalHTMLContent += "<style>" + cssContent + "</style>";
+
+            finalHTMLContent += "</head><body>";
+
+            // adding html content
+            finalHTMLContent += htmlContent;
+
+            // adding the javascript
+            finalHTMLContent += "<script type='text/javascript'>" + jsContent + "</script>";
+
+            finalHTMLContent += "</body></html>";
+
+            return finalHTMLContent;
+        });
+
+        this.getAttachedLibraryInfo = (function() {
+            return $("#sel_library").val();
+        });
+
+        this.showOutput = (function() {
+            var htmlContent = this.getHTMLContent();
+            var cssContent = this.getCSSContent();
+            var jsContent = this.getJSContent();
+            var selectedLibrary = this.getAttachedLibraryInfo();
+            var finalHTMLContent = prepareFullHTML(htmlContent, cssContent, jsContent, selectedLibrary);
+            //window.fctie.configObject.outputContainer.attr('src',"data:text/html;charset=utf-8," + escape(finalHTMLContent));
+            window.fctie.configObject.outputContainer.attr('data',"data:text/html;charset=utf-8,"+escape(finalHTMLContent));
+        });
+});
+
 $(document).ready(function() {
 	
 	// this function populates the library list
