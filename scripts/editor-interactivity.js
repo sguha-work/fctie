@@ -34,14 +34,19 @@ fctie.libraryList = [
 	},
 ];
 
+fctie.attachLibraryToProgram = (function(libraryIndex) {
+
+});
+
 $(document).ready(function() {
+	
 	// this function populates the library list
 	(function(){
 		var index, 
 		buttonTemplate=$(".fctie_header-rad span").html(),
 		buttonElement;
 		for(index in window.fctie.libraryList) {
-			buttonElement = $(buttonTemplate.replace("__index__", window.fctie.libraryList[index].index).replace("__name__", window.fctie.libraryList[index].name));
+			buttonElement = $(buttonTemplate.replace("__index__", window.fctie.libraryList[index].index).replace("__name__", window.fctie.libraryList[index].name+" v"+window.fctie.libraryList[index].version));
 			if(index==0) {
 				$(".fctie_header-rad span").html(buttonElement);
 			} else {
@@ -49,5 +54,12 @@ $(document).ready(function() {
 			}
 		}
 	})();
+
+	// this function attach the click event to library buttons
+	(function(){
+		$(".fctie_lib_button").on('click', function() {
+			window.fctie.attachLibraryToProgram($(this).data('index'));
+		});
+	}());
 });
 
