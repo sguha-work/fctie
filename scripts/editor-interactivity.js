@@ -35,7 +35,7 @@ fctie.libraryList = [
 ];
 
 fctie.attachLibraryToProgram = (function(libraryIndex) {
-
+	window.fctie.libraryList[libraryIndex].isused = 1;
 });
 
 $(document).ready(function() {
@@ -58,7 +58,15 @@ $(document).ready(function() {
 	// this function attach the click event to library buttons
 	(function(){
 		$(".fctie_lib_button").on('click', function() {
-			window.fctie.attachLibraryToProgram($(this).data('index'));
+			var index = $(this).data('index'),
+			depedenciesArray = window.fctie.libraryList[index].dependant;
+			$(this).attr('disabled', 'disabled');
+			window.fctie.attachLibraryToProgram(index);
+			for(index in depedenciesArray) {
+				window.fctie.attachLibraryToProgram(depedenciesArray[index]);
+				$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('disabled', 'disabled');
+			}
+			
 		});
 	}());
 });
