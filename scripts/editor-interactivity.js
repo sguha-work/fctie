@@ -76,16 +76,10 @@ fctie.fiddle = (function() {
                 finalHTMLContent += '<script type="text/javascript" src="' + selectedLibrary + '"></script>';
             }
 
-            // adding the css
-            finalHTMLContent += "<style>" + cssContent + "</style>";
-
             finalHTMLContent += "</head><body>";
 
             // adding html content
             finalHTMLContent += htmlContent;
-
-            // adding the javascript
-            finalHTMLContent += "<script type='text/javascript'>" + jsContent + "</script>";
 
             finalHTMLContent += "</body></html>";
 
@@ -97,12 +91,9 @@ fctie.fiddle = (function() {
         });
 
         this.showOutput = (function() {
-            var htmlContent = this.getHTMLContent();
-            var cssContent = this.getCSSContent();
-            var jsContent = this.getJSContent();
-            var selectedLibrary = this.getAttachedLibraryInfo();
-            var finalHTMLContent = prepareFullHTML(htmlContent, cssContent, jsContent, selectedLibrary);
-            //window.fctie.configObject.outputContainer.attr('src',"data:text/html;charset=utf-8," + escape(finalHTMLContent));
+            var inputContent = this.getInputContent(),
+            	selectedLibraries = this.getAttachedLibraryInfo(),
+            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);
             window.fctie.configObject.outputContainer.attr('data',"data:text/html;charset=utf-8,"+escape(finalHTMLContent));
         });
 });
