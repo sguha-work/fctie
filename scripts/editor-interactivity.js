@@ -34,6 +34,8 @@ fctie.libraryList = [
 	},
 ];
 
+fctie.usedLibraies = [];
+
 fctie.attachLibraryToProgram = (function(libraryIndex) {
 	window.fctie.libraryList[libraryIndex].isused = 1;
 });
@@ -68,12 +70,13 @@ fctie.fiddle = (function() {
             }
         });
 
-        var prepareFullHTML = (function(htmlContent, cssContent, jsContent, selectedLibrary) {
-            var finalHTMLContent = '<!DOCTYPE html><html><head>';
+        var prepareFullHTML = (function(htmlContent, selectedLibraries) {
+            var finalHTMLContent = '<!DOCTYPE html><html><head>',
+            	index;
 
             // adding the library
-            if ($.trim(selectedLibrary)) {
-                finalHTMLContent += '<script type="text/javascript" src="' + selectedLibrary + '"></script>';
+            for (index in selectedLibraries) {
+                finalHTMLContent += '<script type="text/javascript" src="' + selectedLibraries[index] + '"></script>';
             }
 
             finalHTMLContent += "</head><body>";
@@ -87,7 +90,12 @@ fctie.fiddle = (function() {
         });
 
         this.getAttachedLibraryInfo = (function() {
-            return $("#sel_library").val();
+        	var index,
+        	librayLinksArray = [];
+        	for(index in window.fctie.usedLibraies) {
+        		librayLinksArray.push(window.fctie.usedLibraies[index]);
+        	}
+            return librayLinksArray;
         });
 
         this.showOutput = (function() {
