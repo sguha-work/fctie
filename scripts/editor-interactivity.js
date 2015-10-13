@@ -37,11 +37,16 @@ fctie.libraryList = [
 $(document).ready(function() {
 	// this function populates the library list
 	(function(){
-		var index, libraryObject,
-		buttonTemplate=$(".fctie_header-rad span").html();alert(buttonTemplate);
+		var index, 
+		buttonTemplate=$(".fctie_header-rad span").html(),
+		buttonElement;
 		for(index in window.fctie.libraryList) {
-			libraryObject = window.fctie.libraryList[index];
-
+			buttonElement = $(buttonTemplate.replace("__index__", window.fctie.libraryList[index].index).replace("__name__", window.fctie.libraryList[index].name));
+			if(index==0) {
+				$(".fctie_header-rad span").html(buttonElement);
+			} else {
+				$(".fctie_header-rad span").append(buttonElement);
+			}
 		}
 	})();
 });
