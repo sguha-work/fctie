@@ -21,7 +21,7 @@ fctie.libraryList = [
 		name: "jQuery UI",
 		version: "1.11.4",
 		url: "",
-		dependant: [1],
+		dependant: [2],
 		isused: 0
 	},
 	{
@@ -38,6 +38,7 @@ fctie.usedLibraies = [];
 
 fctie.attachLibraryToProgram = (function(libraryIndex) {
 	window.fctie.libraryList[libraryIndex].isused = 1;
+	fctie.usedLibraies.push(window.fctie.libraryList[libraryIndex].url);
 });
 
 fctie.configObject = ({
@@ -126,7 +127,7 @@ $(document).ready(function() {
 	// this function attach the click event to library buttons
 	(function(){
 		$(".fctie_lib_button").on('click', function() {
-			var index = $(this).data('index'),
+			var index = (parseInt($(this).attr('data-index'))-1),
 			depedenciesArray = window.fctie.libraryList[index].dependant;
 			$(this).attr('disabled', 'disabled');
 			window.fctie.attachLibraryToProgram(index);
