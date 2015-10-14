@@ -8,14 +8,14 @@ fctie.libraryList = [
 		dependant: [],
 		isused: 0
 	},
-	{
-		index: 2,
-		name: "jQuery",
-		version: "2.x",
-		url: "http://code.jquery.com/jquery-2.1.3.js",
-		dependant: [],
-		isused: 0
-	},
+	// {
+	// 	index: 2,
+	// 	name: "jQuery",
+	// 	version: "2.x",
+	// 	url: "http://code.jquery.com/jquery-2.1.3.js",
+	// 	dependant: [],
+	// 	isused: 0
+	// },
 	{
 		index: 3,
 		name: "jQuery UI",
@@ -24,14 +24,14 @@ fctie.libraryList = [
 		dependant: [2],
 		isused: 0
 	},
-	{
-		index: 4,
-		name: "jQuery UI",
-		version: "1.10.4",
-		url: "",
-		dependant: [1],
-		isused: 0
-	},
+	// {
+	// 	index: 4,
+	// 	name: "jQuery UI",
+	// 	version: "1.10.4",
+	// 	url: "",
+	// 	dependant: [1],
+	// 	isused: 0
+	// },
 ];
 
 fctie.usedLibraies = [];
@@ -42,7 +42,7 @@ fctie.attachLibraryToProgram = (function(libraryIndex) {
 });
 
 fctie.configObject = ({
-    inputContainer : $("#fctie_input textarea"),
+    inputContainer : $(".fctie_input textarea"),
     outputContainer : $("#fctie_output")
 });
 
@@ -92,7 +92,7 @@ fctie.fiddle = (function() {
 
         this.getAttachedLibraryInfo = (function() {
         	var index,
-        	librayLinksArray = [];
+        		librayLinksArray = [];
         	for(index in window.fctie.usedLibraies) {
         		librayLinksArray.push(window.fctie.usedLibraies[index]);
         	}
@@ -102,7 +102,7 @@ fctie.fiddle = (function() {
         this.showOutput = (function() {
             var inputContent = this.getInputContent(),
             	selectedLibraries = this.getAttachedLibraryInfo(),
-            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);
+            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);console.log(finalHTMLContent);
             window.fctie.configObject.outputContainer.attr('data',"data:text/html;charset=utf-8,"+escape(finalHTMLContent));
         });
 });
@@ -138,5 +138,11 @@ $(document).ready(function() {
 			
 		});
 	}());
+
+	// click event of the execute button
+	$(".fctie_input-execute").on('click', function(){
+		var fiddleObject = new window.fctie.fiddle();
+		fiddleObject.showOutput();		
+	});
 });
 
