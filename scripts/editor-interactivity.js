@@ -111,14 +111,14 @@ $(document).ready(function() {
 	// this function populates the library list
 	(function(){
 		var index, 
-		buttonTemplate=$(".fctie_header-rad span").html(),
+		buttonTemplate=$(".fctie_header-rad span:first").html(),
 		buttonElement;
 		for(index in window.fctie.libraryList) {
 			buttonElement = $(buttonTemplate.replace("__index__", window.fctie.libraryList[index].index).replace("__name__", window.fctie.libraryList[index].name+" v"+window.fctie.libraryList[index].version));
 			if(index==0) {
-				$(".fctie_header-rad span").html(buttonElement);
+				$(".fctie_header-rad span:first").html(buttonElement);
 			} else {
-				$(".fctie_header-rad span").append(buttonElement);
+				$(".fctie_header-rad span:first").append(buttonElement);
 			}
 		}
 	})();
