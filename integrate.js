@@ -14,12 +14,6 @@ config.script = fs.readFileSync('scripts/editor-interactivity.js', 'utf8');
 config.jquery = fs.readFileSync('scripts/jquery.js', 'utf8');
 
 
-var generateScriptTag = (function(args){
-return "<script type=\"text/javascript\" src="+ args.replace("\"", "/\"") +"></script>\n";
-});
-
-
-
 //getting all the folder names from 'fiddles' directory
 config.files = fs.readdirSync('fiddles');
 
