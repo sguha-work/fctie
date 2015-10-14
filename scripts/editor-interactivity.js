@@ -102,7 +102,7 @@ fctie.fiddle = (function() {
         this.showOutput = (function() {
             var inputContent = this.getInputContent(),
             	selectedLibraries = this.getAttachedLibraryInfo(),
-            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);console.log(finalHTMLContent);
+            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);
             window.fctie.configObject.outputContainer.attr('data',"data:text/html;charset=utf-8,"+escape(finalHTMLContent));
         });
 });
