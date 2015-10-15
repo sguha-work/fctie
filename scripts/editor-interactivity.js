@@ -48,7 +48,8 @@ fctie.configObject = ({
 
 fctie.fiddle = (function() {
     	this.getInputContent = (function() {
-            var htmlContent = window.fctie.configObject.inputContainer.val();
+            var htmlContent = editAreaLoader.getValue("tryit");//window.fctie.configObject.inputContainer;
+
             return htmlContent;
         });
 
@@ -102,7 +103,7 @@ fctie.fiddle = (function() {
         this.showOutput = (function() {
             var inputContent = this.getInputContent(),
             	selectedLibraries = this.getAttachedLibraryInfo(),
-            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);console.log(finalHTMLContent);
+            	finalHTMLContent = prepareFullHTML(inputContent, selectedLibraries);
             window.fctie.configObject.outputContainer.attr('data',"data:text/html;charset=utf-8,"+escape(finalHTMLContent));
         });
 });
@@ -144,16 +145,4 @@ $(document).ready(function() {
 		var fiddleObject = new window.fctie.fiddle();
 		fiddleObject.showOutput();		
 	});
-});
-
-var textarea = {};
-
-textarea.fontSize = (function(val){
-	var t = $('textarea');
-	t.css("font-size", val+'px');
-});
-
-textarea.background = (function(val){
-	var t = $('textarea');
-	t.css("background-color", val);
 });

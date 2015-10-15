@@ -47,7 +47,7 @@ for(var i=0; i<config.files.length; i++ ) //config.files.length
 	fiddleContent = fiddleContent.toString().replace("<body>", config.Fusioncharts);
 	fiddleContent = fiddleContent.toString().replace("</body>", "");
 	
-	var newText = config.template.replace("<textarea></textarea>", "<textarea>" +  fiddleContent +"</textarea>");
+	var newText = config.template.replace("<textarea id=\"tryit\"></textarea>", "<textarea id=\"tryit\">" +  fiddleContent +"</textarea>");
 	//to write final output in a single file.
 	fs.writeFileSync('final-fiddle/' + config.files[i] + ".html", newText, 'utf8');	
 }	
