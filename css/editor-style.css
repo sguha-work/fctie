@@ -1,5 +1,11 @@
-body{ padding: 0; margin: 0}
-
+body{ 
+	padding: 0; 
+	margin: 0;
+	min-width: 700px;
+}
+html  {
+ min-width: 700px;
+}
 
 
 
@@ -35,7 +41,6 @@ body{ padding: 0; margin: 0}
 .fctie_input-execute, .fctie_input-export {
 
     background-color: transparent;
-    width: 5em;
     height: 2.8em;
     outline: none;
     border-radius: 5px;
@@ -48,7 +53,7 @@ body{ padding: 0; margin: 0}
 
 	position: absolute;
 	top: 13em;
-	left: 48em;
+	left: 47%;
 }
 
 .fctie_container{
@@ -61,12 +66,17 @@ body{ padding: 0; margin: 0}
 }
 
 .fctie_container .fctie_block{
-	margin-left: 2%;
+	display: block;
+	margin-left: 1%;
 	margin-top: 2%;
 	height: 92%;
 	width: 46%;
 	float: left;
 	
+}
+
+.fctie_container .fctie_block:last-of-type{
+	margin-left: 5%;
 }
 
 .fctie_container .fctie_block .fctie_block-heading {
@@ -88,6 +98,8 @@ body{ padding: 0; margin: 0}
 	width: 98.8%;
 	resize: none;
 	outline: none;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
 }
 
 #fctie_output {

@@ -49,7 +49,7 @@ fctie.configObject = ({
 fctie.fiddle = (function() {
     	this.getInputContent = (function() {
             var htmlContent = window.fctie.configObject.inputContainer.val();
-            return htmlContent
+            return htmlContent;
         });
 
         this.resetElements = (function() {
@@ -146,3 +146,14 @@ $(document).ready(function() {
 	});
 });
 
+var textarea = {};
+
+textarea.fontSize = (function(val){
+	var t = $('textarea');
+	t.css("font-size", val+'px');
+});
+
+textarea.background = (function(val){
+	var t = $('textarea');
+	t.css("background-color", val);
+});
