@@ -47,7 +47,7 @@ for(var i=0; i<config.files.length; i++ ) //config.files.length
 	//replacing removing HTML body tag
 	fiddleContent = fiddleContent.toString().replace("<body>", config.Fusioncharts);
 	fiddleContent = fiddleContent.toString().replace("</body>", "");
-	
+	//combinig fiddle contents and Try-It-Editor content togather in a single file.
 	var newText = config.template.replace("<textarea id=\"tryit\"></textarea>", "<textarea id=\"tryit\">" +  fiddleContent +"</textarea>");
 	//to write final output in a single file.
 	fs.writeFileSync('final-fiddle/' + config.files[i] + ".html", newText, 'utf8');	
