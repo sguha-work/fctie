@@ -44,6 +44,7 @@ for(var i=0; i<config.files.length; i++ ) //config.files.length
 {
 	var fiddleContent = fs.readFileSync('fiddles/' + config.files[i] + '/' + config.files[i] + '.html'); 
 	fiddleContent = fiddleContent.toString().match(/<body[^>]*>[\s\S]*<\/body>/gi);
+	//replacing removing HTML body tag
 	fiddleContent = fiddleContent.toString().replace("<body>", config.Fusioncharts);
 	fiddleContent = fiddleContent.toString().replace("</body>", "");
 	
