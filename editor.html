@@ -49,18 +49,29 @@
 
 </div>
 <script>
+
+var resizeTextArea =(function(){
+  document.getElementById('tryit').style.width="100%";
+  document.getElementById('tryit').style.height="100%";
+});
+
+
  editAreaLoader.init({
-      id: "tryit" // id of the textarea to transform    
-      ,start_highlight: true  // if start with highlight
-      ,allow_resize: "false"
-      ,allow_toggle: false
-      ,word_wrap: true
-      ,language: "en"
-      ,syntax: "basic" 
-      ,toolbar: "undo,redo" 
+      id: "tryit", // id of the textarea to transform    
+      start_highlight: true,  // if start with highlight
+      allow_resize: false,
+      allow_toggle: false,
+      word_wrap: true,
+      language: "en",
+      syntax: "basic", 
+      toolbar: "undo,redo",
+      EA_init_callback: resizeTextArea()
     });
+
+
 
 </script>
 <script type="text/javascript" src="scripts/editor-interactivity.js"></script>
 </body>
 </html>
+
