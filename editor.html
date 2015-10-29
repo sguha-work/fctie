@@ -5,9 +5,6 @@
     <link rel="stylesheet" type="text/css" href="css/editor-style.css">
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script language="Javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
-
-
-
 </head>
 <body>
 <div class="fctie_wrapper">
@@ -26,7 +23,7 @@
    
     <div class="fctie_container">
 
-        <div class="fctie_block">
+        <div  class="fctie_block">
           <div class="fctie_block-heading">Input</div>  
           <div class="fctie_block-container fctie_input"><textarea id="tryit"></textarea></div>
         </div>
@@ -46,7 +43,8 @@
 
 var resizeTextArea =(function(){
   document.getElementById('tryit').style.width="100%";
-  document.getElementById('tryit').style.height="100%";
+  document.getElementById('tryit').style.height="300px";
+  document.getElementById('fctie_output').style.height="300px";
 });
 
 

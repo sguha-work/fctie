@@ -48,7 +48,7 @@ fctie.configObject = ({
 
 fctie.fiddle = (function() {
     	this.getInputContent = (function() {
-            var htmlContent = window.fctie.configObject.inputContainer.val();
+            var htmlContent = editAreaLoader.getValue("tryit");;
             return htmlContent
         });
 
