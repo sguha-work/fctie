@@ -108,7 +108,7 @@ fctie.fiddle = (function() {
 });
 
 $(document).ready(function() {
-	
+
 	// this function populates the library list
 	(function(){
 		var index, 
@@ -157,6 +157,13 @@ $(document).ready(function() {
 
 	// click event of the execute button
 	$(".fctie_input-execute").on('click', function(){
+		var button = $(this);
+		button.attr('disabled', 'disabled');
+		button.val("executing--");
+		window.setTimeout(function(){
+			button.val("execute");
+			button.removeAttr('disabled');
+		},2000);
 		var fiddleObject = new window.fctie.fiddle();
 		fiddleObject.showOutput();		
 	});
