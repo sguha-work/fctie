@@ -8,14 +8,14 @@ fctie.libraryList = [
 		dependant: [],
 		isused: 0
 	},
-	// {
-	// 	index: 2,
-	// 	name: "jQuery",
-	// 	version: "2.x",
-	// 	url: "http://code.jquery.com/jquery-2.1.3.js",
-	// 	dependant: [],
-	// 	isused: 0
-	// },
+	{
+		index: 2,
+		name: "jQuery",
+		version: "2.x",
+		url: "http://code.jquery.com/jquery-2.1.3.js",
+		dependant: [],
+		isused: 0
+	},
 	{
 		index: 3,
 		name: "jQuery UI",
@@ -24,14 +24,14 @@ fctie.libraryList = [
 		dependant: [2],
 		isused: 0
 	},
-	// {
-	// 	index: 4,
-	// 	name: "jQuery UI",
-	// 	version: "1.10.4",
-	// 	url: "",
-	// 	dependant: [1],
-	// 	isused: 0
-	// },
+	{
+		index: 4,
+		name: "jQuery UI",
+		version: "1.10.4",
+		url: "",
+		dependant: [1],
+		isused: 0
+	},
 ];
 
 fctie.usedLibraies = [];
@@ -127,14 +127,21 @@ $(document).ready(function() {
 	// this function attach the click event to library buttons
 	(function(){
 		$(".fctie_lib_button").on('click', function() {
-			var index = (parseInt($(this).attr('data-index'))-1),
-			depedenciesArray = window.fctie.libraryList[index].dependant;
-			$(this).attr('disabled', 'disabled');
-			window.fctie.attachLibraryToProgram(index);
-			for(index in depedenciesArray) {
-				window.fctie.attachLibraryToProgram(depedenciesArray[index]);
-				$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('disabled', 'disabled');
+			if(!$(this).hasClass('active')) {
+				$(this).addClass('active');
+				$(this).attr('title', "Click to EXCLUDE this library")
+				var index = (parseInt($(this).attr('data-index'))-1),
+				depedenciesArray = window.fctie.libraryList[index].dependant;
+				$(this).attr('disabled', 'disabled');
+				window.fctie.attachLibraryToProgram(index);
+				for(index in depedenciesArray) {
+					window.fctie.attachLibraryToProgram(depedenciesArray[index]);
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('disabled', 'disabled');
+				}	
+			} else {
+
 			}
+			
 			
 		});
 	}());
