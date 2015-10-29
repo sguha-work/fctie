@@ -129,17 +129,26 @@ $(document).ready(function() {
 		$(".fctie_lib_button").on('click', function() {
 			if(!$(this).hasClass('active')) {
 				$(this).addClass('active');
-				$(this).attr('title', "Click to EXCLUDE this library")
+				$(this).attr('title', "Click to EXCLUDE this library");
 				var index = (parseInt($(this).attr('data-index'))-1),
 				depedenciesArray = window.fctie.libraryList[index].dependant;
-				$(this).attr('disabled', 'disabled');
 				window.fctie.attachLibraryToProgram(index);
 				for(index in depedenciesArray) {
 					window.fctie.attachLibraryToProgram(depedenciesArray[index]);
-					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('disabled', 'disabled');
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").addClass('active');
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('title', 'Click to EXCLUDE this library');
 				}	
 			} else {
-
+				$(this).removeClass('active');
+				$(this).attr('title', "Click to INCLUDE this library");
+				var index = (parseInt($(this).attr('data-index'))-1),
+				depedenciesArray = window.fctie.libraryList[index].dependant;
+				window.fctie.attachLibraryToProgram(index);
+				for(index in depedenciesArray) {
+					window.fctie.attachLibraryToProgram(depedenciesArray[index]);
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").removeClass('active');
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('title', 'Click to INCLUDE this library');
+				}					
 			}
 			
 			
