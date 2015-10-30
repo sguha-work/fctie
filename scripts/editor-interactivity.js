@@ -8,14 +8,14 @@ fctie.libraryList = [
 		dependant: [],
 		isused: 0
 	},
-	// {
-	// 	index: 2,
-	// 	name: "jQuery",
-	// 	version: "2.x",
-	// 	url: "http://code.jquery.com/jquery-2.1.3.js",
-	// 	dependant: [],
-	// 	isused: 0
-	// },
+	{
+		index: 2,
+		name: "jQuery",
+		version: "2.x",
+		url: "http://code.jquery.com/jquery-2.1.3.js",
+		dependant: [],
+		isused: 0
+	},
 	{
 		index: 3,
 		name: "jQuery UI",
@@ -24,14 +24,14 @@ fctie.libraryList = [
 		dependant: [2],
 		isused: 0
 	},
-	// {
-	// 	index: 4,
-	// 	name: "jQuery UI",
-	// 	version: "1.10.4",
-	// 	url: "",
-	// 	dependant: [1],
-	// 	isused: 0
-	// },
+	{
+		index: 4,
+		name: "jQuery UI",
+		version: "1.10.4",
+		url: "",
+		dependant: [1],
+		isused: 0
+	},
 ];
 
 fctie.usedLibraies = [];
@@ -47,10 +47,16 @@ fctie.configObject = ({
 });
 
 fctie.fiddle = (function() {
+    	this.exportProgramAsHTML = (function(anchor){
+    		anchor.attr('href', window.fctie.configObject.outputContainer.attr('data'));
+    		return true;
+    		//window.fctie.configObject.outputContainer.attr('data')
+    	});
     	this.getInputContent = (function() {
-            var htmlContent = editAreaLoader.getValue("tryit");//window.fctie.configObject.inputContainer;
 
+            var htmlContent = editAreaLoader.getValue("tryit");
             return htmlContent;
+
         });
 
         this.resetElements = (function() {
@@ -109,7 +115,7 @@ fctie.fiddle = (function() {
 });
 
 $(document).ready(function() {
-	
+
 	// this function populates the library list
 	(function(){
 		var index, 
@@ -128,21 +134,50 @@ $(document).ready(function() {
 	// this function attach the click event to library buttons
 	(function(){
 		$(".fctie_lib_button").on('click', function() {
-			var index = (parseInt($(this).attr('data-index'))-1),
-			depedenciesArray = window.fctie.libraryList[index].dependant;
-			$(this).attr('disabled', 'disabled');
-			window.fctie.attachLibraryToProgram(index);
-			for(index in depedenciesArray) {
-				window.fctie.attachLibraryToProgram(depedenciesArray[index]);
-				$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('disabled', 'disabled');
+			if(!$(this).hasClass('active')) {
+				$(this).addClass('active');
+				$(this).attr('title', "Click to EXCLUDE this library");
+				var index = (parseInt($(this).attr('data-index'))-1),
+				depedenciesArray = window.fctie.libraryList[index].dependant;
+				window.fctie.attachLibraryToProgram(index);
+				for(index in depedenciesArray) {
+					window.fctie.attachLibraryToProgram(depedenciesArray[index]);
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").addClass('active');
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('title', 'Click to EXCLUDE this library');
+				}	
+			} else {
+				$(this).removeClass('active');
+				$(this).attr('title', "Click to INCLUDE this library");
+				var index = (parseInt($(this).attr('data-index'))-1),
+				depedenciesArray = window.fctie.libraryList[index].dependant;
+				window.fctie.attachLibraryToProgram(index);
+				for(index in depedenciesArray) {
+					window.fctie.attachLibraryToProgram(depedenciesArray[index]);
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").removeClass('active');
+					$(".fctie_lib_button[data-index='"+depedenciesArray[index]+"']").attr('title', 'Click to INCLUDE this library');
+				}					
 			}
+			
 			
 		});
 	}());
 
 	// click event of the execute button
 	$(".fctie_input-execute").on('click', function(){
+		var button = $(this);
+		button.attr('disabled', 'disabled');
+		button.val("executing--");
+		window.setTimeout(function(){
+			button.val("execute");
+			button.removeAttr('disabled');
+		},2000);
 		var fiddleObject = new window.fctie.fiddle();
 		fiddleObject.showOutput();		
+	});
+
+	// click event of export button
+	$(".fctie_a-export").on('click', function(){
+		var fiddleObject = new window.fctie.fiddle();
+		return fiddleObject.exportProgramAsHTML($(this));
 	});
 });
