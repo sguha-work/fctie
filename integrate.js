@@ -1,17 +1,14 @@
 // to run this code use node integrate.js
-var fs = require('fs');
+var fs = require('fs-extra');
 var config = {};
 
 config.Fusioncharts  = "\n<script type=\"text/javascript\" src=\"http://static.fusioncharts.com/code/latest/fusioncharts.js\"></script>\n";
 config.Fusioncharts += "<script type=\"text/javascript\" src=\"http://static.fusioncharts.com/code/latest/fusioncharts.charts.js\"></script>\n";
 //config.Fusioncharts += "<script type=\"text/javascript\" src=\"http://static.fusioncharts.com/code/latest/themes/fusioncharts.theme.fint.js\"></script>\n";
 
-
-//getting the editor template html, css and scripts.
-config.css = fs.readFileSync('css/editor-style.css', 'utf8');
+//getting the editor template html.
 config.template = fs.readFileSync('editor.html', 'utf8');
-config.script = fs.readFileSync('scripts/editor-interactivity.js', 'utf8');
-config.jquery = fs.readFileSync('scripts/jquery.js', 'utf8');
+
 
 var generateScriptTag = (function(args){
 return "<script type=\"text/javascript\" src="+ args.replace("\"", "/\"") +"></script>\n";
@@ -21,19 +18,16 @@ return "<script type=\"text/javascript\" src="+ args.replace("\"", "/\"") +"></s
 config.files = fs.readdirSync('fiddles');
 
 //try to create a directory if not exist and name it as 'final-fiddle'.
-//inside the 'final-fiddle' creating a another directory name as 'css'.
 try { 
 	//creating root directory.
 	fs.mkdirSync('final-fiddle');
-	//creating directory for css files .
-	fs.mkdirSync('final-fiddle/css');
 	//placing the css files.
-	fs.writeFileSync('final-fiddle/css/editor-style.css', config.css, 'utf8' );
-	//creating the directory for script files.
-	fs.mkdirSync('final-fiddle/scripts');
+	fs.copySync('css', 'final-fiddle/css');	
 	//placing the script files. 
-	fs.writeFileSync('final-fiddle/scripts/editor-interactivity.js', config.script, 'utf8' );
-	fs.writeFileSync('final-fiddle/scripts/jquery.js', config.jquery, 'utf8' );
+	fs.copySync('scripts', 'final-fiddle/scripts');
+	//placing the edit-area files and folder in the final-fiddles
+	fs.copySync('edit_area', 'final-fiddle/edit_area');
+
  }
 catch (e) { console.log("folder already exist.");}
 

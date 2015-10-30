@@ -1,0 +1,10 @@
+{
+  
+  "description": "Integrate editor.html template with fiddle contents.",
+  "main": "integrate.js",
+  "author": "Suvradip Saha",
+  "dependencies": {
+    "fs-extra": "0.26.x"
+    
+  }
+}
