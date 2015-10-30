@@ -47,6 +47,11 @@ fctie.configObject = ({
 });
 
 fctie.fiddle = (function() {
+    	this.exportProgramAsHTML = (function(anchor){
+    		anchor.attr('href', window.fctie.configObject.outputContainer.attr('data'));
+    		return true;
+    		//window.fctie.configObject.outputContainer.attr('data')
+    	});
     	this.getInputContent = (function() {
             var htmlContent = editAreaLoader.getValue("tryit");;
             return htmlContent
@@ -166,6 +171,12 @@ $(document).ready(function() {
 		},2000);
 		var fiddleObject = new window.fctie.fiddle();
 		fiddleObject.showOutput();		
+	});
+
+	// click event of export button
+	$(".fctie_a-export").on('click', function(){
+		var fiddleObject = new window.fctie.fiddle();
+		return fiddleObject.exportProgramAsHTML($(this));
 	});
 });
 
