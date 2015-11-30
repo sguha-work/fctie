@@ -16,6 +16,7 @@
 
         <div class="fctie_test">
             <div class="fctie_header-block">
+                <!--  <a title="Open the codes in JSFIDDLE" target="_blank" href="##jsfiddle##"  class="btn btn-blue" >JSFiddle</a>    -->
                 <a title="Export the output as standalone html file" href=""  class="fctie_a-export btn btn-blue" download>export</a>   
             </div>
         </div>
@@ -41,24 +42,36 @@
 </div>
 <script>
 
-var resizeTextArea =(function(){
-  document.getElementById('tryit').style.width="100%";
-  document.getElementById('tryit').style.height="300px";
-  document.getElementById('fctie_output').style.height="300px";
+//calculation of height of input & output container.
+  var a = $(".fctie_header").outerHeight(),
+      b = $(".fctie_block-heading").outerHeight(),
+      c = $(window).height(),
+      theHeight = c - (a + b + 180);
+
+  $(".output-block").css("height", theHeight);
+  var resizeTextArea =(function(){
+  $("#tryit").css("width","100%");
+  $("#tryit").css("height",theHeight);
+  $("#fctie_output").css("height",theHeight);
+  });
+
+var settings = {
+    "id": "tryit", // id of the textarea to transform    
+    "start_highlight": true,  // if start with highlight
+    "allow_resize": false,
+    "allow_toggle": false,
+    "word_wrap": true,
+    "language": "en",
+    "syntax": "js", 
+    "toolbar": "Editor", //undo,redo
+    "EA_init_callback": resizeTextArea()
+};
+
+ editAreaLoader.init(settings);
+
+$(window).resize(function(event) {
+  editAreaLoader.execCommand("tryit", "init", settings);
 });
-
-
- editAreaLoader.init({
-      id: "tryit", // id of the textarea to transform    
-      start_highlight: true,  // if start with highlight
-      allow_resize: false,
-      allow_toggle: false,
-      word_wrap: true,
-      language: "en",
-      syntax: "basic", 
-      toolbar: "undo,redo",
-      EA_init_callback: resizeTextArea()
-    });
 
 
 

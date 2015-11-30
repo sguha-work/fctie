@@ -180,4 +180,5 @@ $(document).ready(function() {
 		var fiddleObject = new window.fctie.fiddle();
 		return fiddleObject.exportProgramAsHTML($(this));
 	});
+	$(".fctie_input-execute").trigger('click');
 });
